@@ -1,0 +1,12 @@
+spring:
+  ai:
+    dashscope:
+      api-key: ${DASHSCOPE_API_KEY:}
+  datasource:
+    username: ${AI_DB_USER:root}
+    password: ${AI_DB_PASSWORD:}
+  mail:
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+search-api:
+  api-key: ${SEARCH_API_KEY:}

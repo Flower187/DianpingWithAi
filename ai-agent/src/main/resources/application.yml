@@ -1,0 +1,71 @@
+spring:
+  application:
+    name: xue-ai-agent
+  profiles:
+    active: local
+    include: sensitive
+  mvc:
+    pathmatch:
+      # 解决Spring Boot 3.x中路径匹配问题（关键！）
+      matching-strategy: ant_path_matcher
+  ai:
+    mcp:
+      client:
+           stdio:
+             servers:
+               image-search-mcp-server:
+                 command: "${JAVA_COMMAND:java}"
+                 args:
+                   - "-Dspring.ai.mcp.server.stdio=true"
+                   - "-Dspring.main.web-application-type=none"
+                   - "-Dlogging.pattern.console="
+                   - "-jar"
+                   - "${IMAGE_MCP_JAR:image-search-mcp-server/target/image-search-mcp-server-0.0.1-SNAPSHOT.jar}"
+                 timeout: 30000
+        #sse:
+          #connections:
+          #  image-search-mcp-server:
+           #   url: http://localhost:8127
+           #   request-timeout: 30s
+    chat:
+      options:
+      model: qwen-plus
+    vector:
+      enable-pgvector: false
+
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/healthai?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mail:
+    host: smtp.qq.com
+    port: 465
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+        socketFactory:
+          class: javax.net.ssl.SSLSocketFactory
+server:
+  port: 8123
+  servlet:
+    context-path: /api
+# springdoc-openapi config
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.xue.aiagent_me.controller
+# knife4j config
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn

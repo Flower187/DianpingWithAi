@@ -1,0 +1,15 @@
+**/target/
+**/node_modules/
+**/runtime-logs/
+**/chat-memory/
+**/tmp/
+**/.idea/
+*.iml
+*.log
+.env
+.env.*
+**/application-sensitive.yml
+**/application-sensitive.yaml
+**/application-local.yml
+**/application-local.yaml
+deploy/backups/
