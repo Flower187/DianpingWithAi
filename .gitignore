@@ -13,3 +13,8 @@
 **/application-local.yml
 **/application-local.yaml
 deploy/backups/
+
+# 本机服务配置
+**/application*.yml
+**/application*.yaml
+**/application*.properties
